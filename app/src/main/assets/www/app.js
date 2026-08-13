@@ -1,5 +1,4 @@
 
-import * as Astronomy from 'https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/+esm';
 const ECLIPSES = {
   '2026': {
     label: '12 agosto 2026', targetDate: '2026-08-12', searchStart: '2026-08-11T00:00:00Z',

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#08111f" />
+<title>AstroPointer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
+<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+<header>
+  <div class="brand"><div><h1>AstroPointer</h1><small>Buscador astronómico + eventos + eclipses</small></div><span id="nativeBadge" class="pill">Android nativo</span></div>
+  <nav>
+    <button data-view="now" class="active">Agora</button><button data-view="events">Eventos</button><button data-view="map">Mapa</button><button data-view="aim">Mira</button>
+  </nav>
+</header>
+<main>
+<section id="view-now" class="view active">
+  <div class="panel"><div class="row"><button id="refreshGps" class="primary">◎ Atualizar GPS</button><div id="gpsStatus" class="status">A aguardar GPS nativo…</div></div></div>
+  <div class="panel"><h2>O que está no céu agora</h2><div id="bodyList" class="body-list"></div><p class="small">Azimute referido ao norte verdadeiro. Objetos abaixo do horizonte aparecem esbatidos.</p></div>
+</section>
+<section id="view-events" class="view">
+  <div class="panel"><h2>Eclipses solares</h2><div class="row"><select id="eventYear"><option value="2026">12 agosto 2026 — total</option><option value="2027">2 agosto 2027 — total</option></select></div><div id="eventSummary" class="event-card">A aguardar posição.</div></div>
+  <div class="panel"><h2>Arquitetura preparada para próximos eventos</h2><div class="status">Próximas versões: conjunções, oposições, máximas elongações, eclipses lunares, chuvas de meteoros, cometas e satélites. O mesmo modo Mira poderá apontar o tripé para qualquer alvo calculado.</div></div>
+</section>
+<section id="view-map" class="view">
+  <div class="panel"><div class="row"><button id="useGps" class="primary">Usar GPS real</button><button id="recenter">Recentrar</button></div><label style="display:block;margin-top:8px">Eclipse<select id="mapYear"><option value="2026">12 agosto 2026</option><option value="2027">2 agosto 2027</option></select></label><div class="coords" style="margin-top:8px"><label>Latitude<input id="latInput" inputmode="decimal"></label><label>Longitude<input id="lonInput" inputmode="decimal"></label></div><button id="useCoords" style="width:100%;margin-top:8px">Usar coordenadas</button><div class="status" style="margin-top:7px">Também pode tocar diretamente no mapa. O azul é o GPS real; o amarelo é o ponto de cálculo.</div></div>
+  <div class="metrics"><div class="metric"><span>Sol coberto</span><strong id="obsc">—</strong><small>área do disco</small></div><div class="metric"><span>Tipo local</span><strong id="kind">—</strong><small id="edgeInfo">—</small></div><div class="metric"><span>Totalidade</span><strong id="totDur">—</strong><small>C2 → C3</small></div><div class="metric"><span>Máximo</span><strong id="peakTime">—</strong><small>hora local</small></div></div>
+  <div class="panel"><div id="map">A carregar mapa…</div><div class="legend"><span><i class="dot" style="background:#7dd3fc"></i>GPS</span><span><i class="dot" style="background:#f6c453"></i>Ponto</span><span>faixa/linha central em amarelo</span></div></div>
+  <div class="panel"><h2>Contactos locais</h2><div id="contactTimes" class="times"></div></div>
+</section>
+<section id="view-aim" class="view">
+  <div class="panel"><h2>Mira do tripé</h2><div class="row"><label>Alvo<select id="aimTarget"><option value="Sun">Sol</option><option value="Moon">Lua</option><option value="Mercury">Mercúrio</option><option value="Venus">Vénus</option><option value="Mars">Marte</option><option value="Jupiter">Júpiter</option><option value="Saturn">Saturno</option><option value="Uranus">Urano</option><option value="Neptune">Neptuno</option><option value="eclipseMax">Sol no máximo do eclipse</option></select></label><label>Eclipse<select id="aimEclipse"><option value="2026">2026</option><option value="2027">2027</option></select></label></div></div>
+  <div class="aim-wrap">
+    <div class="scope"><div class="ring"></div><div id="aimDot"></div></div>
+    <div>
+      <div class="aim-values"><div class="aim-value"><span>Azimute alvo</span><b id="targetAz">—</b></div><div class="aim-value"><span>Altitude alvo</span><b id="targetAlt">—</b></div><div class="aim-value"><span>Tripé / telemóvel</span><b id="phoneAz">—</b></div><div class="aim-value"><span>Elevação</span><b id="phoneAlt">—</b></div><div class="aim-value"><span>Declinação magnética</span><b id="declination">—</b></div><div class="aim-value"><span>Precisão sensor</span><b id="sensorAccuracy">—</b></div></div>
+      <div id="instruction" style="margin-top:10px">A aguardar sensores.</div>
+      <div class="row" style="margin-top:8px"><button id="calAxis">Calibrar eixo óptico</button><button id="clearCal">Limpar calibração</button></div>
+      <p id="calStatus" class="small">Prenda o telemóvel ao tripé com a aresta superior aproximadamente paralela ao eixo óptico. Para calibrar: centre primeiro o alvo real nos binóculos e toque em “Calibrar eixo óptico”.</p>
+    </div>
+  </div>
+  <div class="warning"><strong>Segurança solar:</strong> nunca observe o Sol através de binóculos/telescópio sem filtro solar apropriado montado à frente das objetivas. A mira é apenas um auxiliar de apontamento.</div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
